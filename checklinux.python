@@ -4,7 +4,6 @@
 import psutil, time, xlsxwriter
 from  xlsxwriter import Workbook
 import socket
-import socket
 import time
 
 ##当前时间
@@ -14,7 +13,7 @@ time = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
 hostname = socket.gethostname()
 
 ##IP地址
-outside_ipaddr=socket.socket(socket.AF_INET, socket.SOCK_DGRAM)     ##获取外网网卡
+#outside_ipaddr=socket.socket(socket.AF_INET, socket.SOCK_DGRAM)     ##获取外网网卡
 inside_ipaddr=socket.gethostbyname(socket.gethostname())              ##获取内网网卡
 # u'外网网卡',u'内网网卡',
 #outside_ipaddr,inside_ipaddr,
@@ -39,14 +38,16 @@ net_out = psutil.net_io_counters().bytes_sent/1048576
 
 
 ##建立一个列表存放获取的系统信息
-text = [time,outside_ipaddr,inside_ipaddr,hostname,user_cpu_time,cpu_number,mem_total,mem_free,mem_used,disk_total,disk_used,disk_free,net_in,net_out]
+#text = [time,outside_ipaddr,inside_ipaddr,hostname,user_cpu_time,cpu_number,mem_total,mem_free,mem_used,disk_total,disk_used,disk_free,net_in,net_out]
+text = [time,inside_ipaddr,hostname,user_cpu_time,cpu_number,mem_total,mem_free,mem_used,disk_total,disk_used,disk_free,net_in,net_out]
 
 workbook = xlsxwriter.Workbook('巡检.xlsx')    ##建立一个excel表格
 ##建立一个工作表对象，也就是excel左下角的sheet1，sheet2等，这里建立了一个。
 worksheet = workbook.add_worksheet()
 
 ##存放excel表格标题信息的列表
-title = [u'时间',u'外网地址',u'内网地址',u'主机名',u'用户cpu时间比',u'cpu数量',u'内存总量',u'已使用内存',u'空闲内存',u'磁盘总量',u'已使用磁盘',u'空闲磁盘',u'网卡出流量',u'网卡入流量']
+#title = [u'时间',u'外网地址',u'内网地址',u'主机名',u'用户cpu时间比',u'cpu数量',u'内存总量',u'已使用内存',u'空闲内存',u'磁盘总量',u'已使用磁盘',u'空闲磁盘',u'网卡出流量',u'网卡入流量']
+title = [u'时间',u'网络地址',u'主机名',u'用户cpu时间比',u'cpu数量',u'内存总量',u'已使用内存',u'空闲内存',u'磁盘总量',u'已使用磁盘',u'空闲磁盘',u'网卡出流量',u'网卡入流量']
 
 ##建立设置单元格格式的内容，如set_border是边框加粗，set_bg_color是单元格背景颜色
 format_title = workbook.add_format()
